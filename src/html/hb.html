@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HB Insights</title>
+
+    <script type="text/javascript" src="../js/worlds/hb/entry-bundle.js"></script>
+
+    <link href="../css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="../css/hb.css" media="screen" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="hb">
+    <div class="main">
+
+        <div class="content">
+
+            <div id="hb-ui">
+                <div class="main-error info-error">
+                </div>
+
+                <div class="render">
+
+                    <div class="observation">
+                        <div class="url">
+                            <a href=#" target="_blank"></a>
+                        </div>
+                    </div>
+
+                    <div class="tools">
+                    <span title="Zoom In">
+                        <svg id="tool-zoom-in" class="icon disabled zoom-in">
+                            <use xlink:href="../img/legion/svg/symbol-defs.svg#icon-circle-with-plus"></use>
+                        </svg>
+                    </span>
+                        <span title="Zoom Out">
+                        <svg id="tool-zoom-out" class="icon disabled spacer zoom-out">
+                            <use xlink:href="../img/legion/svg/symbol-defs.svg#icon-circle-with-minus"></use>
+                        </svg>
+                    </span>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="titles">
+                            <div class="time"></div>
+                            <div class="lanes"></div>
+                        </div>
+
+                        <div class="all-lanes">
+                            <div class="time"></div>
+                            <div class="lanes"></div>
+                        </div>
+                    </div>
+
+                    <!--  Legend  -->
+                    <div class="legend">
+                        <div>
+                            <span class="legend-open">Legend</span>
+                        </div>
+                        <div class="legend-content">
+                            <div class="legend-section">
+                                <div class="h3">Lane Colors</div>
+                                <div class="item lane">
+                                    <div class="example-color wrapper"></div>
+                                    <div class="example-description">Wrappers</div>
+                                </div>
+                                <div class="item lane">
+                                    <div class="example-color auction"></div>
+                                    <div class="example-description">Header bidders</div>
+                                </div>
+                                <div class="item lane">
+                                    <div class="example-color adserver"></div>
+                                    <div class="example-description">Ad server calls</div>
+                                </div>
+                            </div>
+
+                            <div class="legend-section">
+                                <div class="h3">URL Calls</div>
+                                <div class="item url-call">
+                                    <div class="example-color library">
+                                        <div></div>
+                                    </div>
+                                    <div class="example-description">JavaScript library loads</div>
+                                </div>
+                                <div class="item url-call">
+                                    <div class="example-color auction">
+                                        <div></div>
+                                    </div>
+                                    <div class="example-description">Bid requests</div>
+                                </div>
+                                <div class="item url-call">
+                                    <div class="example-color adserver">
+                                        <div></div>
+                                    </div>
+                                    <div class="example-description">Ad server calls</div>
+                                </div>
+                                <div class="item url-call">
+                                    <div class="example-color failure">
+                                        <div class="library"></div>
+                                        <div class="auction"></div>
+                                    </div>
+                                    <div class="example-description failure">Failed loads/calls</div>
+                                </div>
+                                <div class="item url-call">
+                                    <div class="example-color event-num">
+                                        <div>2</div>
+                                    </div>
+                                    <div class="example-description">Multiple calls shown as one</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--  Hints  -->
+                    <div class="hints">
+                        <div class="h3">Hints</div>
+                    </div>
+
+                    <!--  Templates  -->
+                    <div class="templates">
+                        <!--  Toolbar icons  -->
+                        <span id="collapse-icon" class="collapse" title="Show compact view">
+                            <svg class="icon">
+                                <use xlink:href="../img/legion/svg/symbol-defs.svg#icon-triangle-down"></use>
+                            </svg>
+                        </span>
+
+                        <span id="uncollapse-icon" class="uncollapse" title="Show full view">
+                            <svg class="icon">
+                                <use xlink:href="../img/legion/svg/symbol-defs.svg#icon-triangle-right"></use>
+                            </svg>
+                        </span>
+
+                        <!-- Time mark -->
+                        <div id="time-mark" class="time-mark">
+                            <div class="time-text"></div>
+                            <div class="time-line"></div>
+                        </div>
+
+                        <!-- Moment Tooltips -->
+                        <span id="mev-dom">DOMContentLoaded event: {time}</span>
+                        <span id="mev-completed">Page load event: {time}</span>
+
+                        <!-- Event tooltip -->
+                        <div id="event-tooltip">
+                            <div class="event-tooltip">
+                                <div><b>{eventType}</b><span class="n-calls"> - {nCalls} {stCalls}</span></div>
+                                <div class="failure">Failed: {stFailureReasons}</div>
+                                &nbsp;<br>
+                                <table>
+                                    <tr>
+                                        <td>Start:</td>
+                                        <td class="value">{startTime}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End:</td>
+                                        <td class="value">{endTime}</td>
+                                    </tr>
+                                    <tr class="length">
+                                        <td>Length:</td>
+                                        <td class="value">{lengthTime}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Event information dialog -->
+                        <div id="event-info" class="event-info dialog-content">
+                            <div class="prompt">The URL called:</div>
+                            <div class="url">
+                                <textarea class="input-url" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Hint -->
+                        <div id="hint">
+                            <div class="hint">
+                                <div class="issue">
+                                    <div>
+                                        <span class="{hintType}">{stType}:</span> {stIssue}
+                                    </div>
+                                    <div class="hint-text-consequence">{stConsequence}</div>
+                                </div>
+                                <div class="hint-fix"><span class="fix">Fix:</span>{stFix}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">&copy; Copyright 2018, Prebid.org</div>
+    </div>
+</body>
+
+</html>

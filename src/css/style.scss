@@ -1,0 +1,123 @@
+/* General simple classes */
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.invisible {
+    display: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.info-error {
+    background-color: #c80000;
+    font-style: italic;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 3px;
+}
+
+.info-message {
+    background-color: #5C9F7F;
+    font-style: italic;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 3px;
+}
+
+/* Button */
+
+button.standard {
+    font-size: 13px;
+    font-weight: bold;
+    border: 0;
+    border-top: 1px solid;
+    min-width: 91px;
+    color: #fff;
+    line-height: 24px;
+    cursor:pointer;
+    padding: 1px 0 1px 0;
+}
+
+button.standard.teal {
+    background-color:#3C6955;
+    background:-webkit-gradient(linear,left top,left bottom,from(#5C9F7F),to(#3C6955));
+    background:-webkit-linear-gradient(top,#5C9F7F,#3C6955);
+    background:-moz-linear-gradient(top,#5C9F7F,#3C6955);
+    background:-ms-linear-gradient(top,#5C9F7F,#3C6955);
+    background:-o-linear-gradient(top,#5C9F7F,#3C6955);
+    background:linear-gradient(top,#5C9F7F,#3C6955);
+    border-color:#84b69e;
+    -webkit-box-shadow:#0f4d2e 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26);
+    -moz-box-shadow:#0f4d2e 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26);
+    box-shadow:#0f4d2e 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26)
+}
+
+button.standard.gray {
+    background-color:#a6a6a6;
+    background:-webkit-gradient(linear,left top,left bottom,from(#a6a6a6),to(#787878));
+    background:-webkit-linear-gradient(top,#a6a6a6,#787878);
+    background:-moz-linear-gradient(top,#a6a6a6,#787878);
+    background:-ms-linear-gradient(top,#a6a6a6,#787878);
+    background:-o-linear-gradient(top,#a6a6a6,#787878);
+    background:linear-gradient(top,#a6a6a6,#787878);
+    border-color:#b6b6b6;
+    -webkit-box-shadow:#666666 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26);
+    -moz-box-shadow:#666666 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26);
+    box-shadow:#666666 0 0 0 1px,0 3px 1px 0 rgba(0,0,0,.26)
+}
+
+button.standard[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* General template settings */
+
+html, body {
+    background-color: #706f74;
+    color: #4c4c4c;
+    margin: 0;
+    padding: 0;
+}
+
+body, input, textarea, button, select {
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.main {
+    background-color: #f2f2f2;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1244px;
+}
+
+.content {
+    border-top: 3px solid #959595;
+    padding: 30px;
+    min-height: 625px;
+    box-sizing: border-box;
+}
+
+.footer {
+    color: #f2f2f2;
+    font-size: 12.5px;
+    width: 100%;
+    padding-bottom: 4px;
+    padding-top: 24px;
+    background-color: #706f74;
+    text-align: center;
+}

@@ -1,0 +1,526 @@
+// Reused constants
+$PANEL_TOOLS_HEIGHT             : 22px;
+$TIME_ROW_HEIGHT                : 30px;
+$EVENT_HEIGHT                   : 17px;
+$LANE_COLLAPSED_HEIGHT          : 40px;
+$POPUP_COLOR                    : #fff8dc;
+$DIALOG_COLOR                   : $POPUP_COLOR;
+$DIALOG_BUTTON_COLOR            : white;
+$EVENT_AUCTION_BORDER_COLOR     : #184070;
+
+// Styles
+.hb {
+    * {
+        box-sizing: border-box;
+    }
+
+    // General styles - jQuery UI
+    .no-close .ui-dialog-titlebar-close {
+        display: none;
+    }
+
+    .no-titlebar .ui-dialog-titlebar {
+        display: none;
+    }
+
+    // General styles - icons
+    svg {
+        overflow: hidden;
+    }
+
+    .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+    }
+
+    // General styles - lanes
+    @mixin styling-lane-wrapper() {
+        background-color: lightgreen;
+        border-bottom: 1px solid green;
+    }
+
+    @mixin styling-lane-auction() {
+        background-color: #add8e6;
+        border-bottom: 1px solid blue;
+    }
+
+    @mixin styling-lane-adserver() {
+        background-color: lightgoldenrodyellow;
+        border-bottom: 1px solid brown;
+    }
+
+    @mixin styling-event-library {
+        border: 1px solid black;
+        background-color: black;
+    }
+
+    @mixin styling-event-auction {
+        background-color: #286090;
+        border: 1px solid $EVENT_AUCTION_BORDER_COLOR;
+        border-radius: 15px;
+    }
+
+    @mixin styling-event-adserver {
+        background-color: orange;
+        border: 1px solid orangered;
+        border-radius: 15px;
+    }
+
+    @mixin styling-event-failure {
+        background-color: red;
+    }
+
+    @mixin styling-event-num {
+        display: inline-block;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 12px;
+        background-color: white;
+        border-radius: 15px;
+        vertical-align: middle;
+    }
+
+    // General styles - various
+    .h3 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    // Main error container
+    .main-error {
+        display: none;
+    }
+
+    // Normal container
+    .render {
+        display: none;
+
+        // Toolbar
+        .tools {
+            padding: 6px 4px 4px 0px;
+            width: 100%;
+            height: $PANEL_TOOLS_HEIGHT;
+            box-sizing: content-box;
+
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+
+            .icon {
+                font-size: $PANEL_TOOLS_HEIGHT;
+                cursor: pointer;
+            }
+
+            .icon.zoom-in,
+            .icon.zoom-out {
+                fill: green;
+                cursor: pointer;
+            }
+
+            .icon.spacer {
+                margin-right: 20px;
+            }
+
+            .icon.disabled {
+                fill: gray;
+                cursor: default;
+            }
+        }
+
+        // Main container
+        .chart-container {
+            width: 100%;
+
+            // General style - time lane
+            .time {
+                height: $TIME_ROW_HEIGHT;
+                border-bottom: 1px solid black;
+                background-color: white;
+                position: relative;
+
+                .time-mark {
+                    position: absolute;
+                    bottom: 0px;
+                }
+
+                .time-line {
+                    height: 8px;
+                    width:  2px;
+                    background-color: black;
+                }
+            }
+
+            // General style - events lane
+            .lane.wrapper {
+                @include styling-lane-wrapper();
+            }
+
+            .lane.auction {
+                @include styling-lane-auction();
+            }
+
+            .lane.adserver {
+                @include styling-lane-adserver();
+            }
+
+            // Titles - left part (column) in the chart
+            .titles {
+                float: left;
+
+                .lane {
+                    padding: 4px 10px 0 10px;
+
+                    .collapse, .uncollapse {
+                        position: relative;
+
+                        .icon {
+                            font-size: 18px;
+                            position: absolute;
+                        }
+                    }
+                }
+
+                .lane.collapsible {
+                    cursor: pointer;
+                }
+
+                .lane.collapsible.collapsed .collapse {
+                    display: none;
+                }
+
+                .lane.collapsible.uncollapsed .uncollapse {
+                    display: none;
+                }
+            }
+
+            .chart-container:after {
+                content: '';
+                clear: both;
+                display: block;
+            }
+
+            // Lanes content - right part of the chart
+            .all-lanes {
+                overflow: auto;
+
+                .lanes {
+                    position: relative;
+
+                    .moment {
+                        width: 3px;
+                        position: absolute;
+                        background-color: black;
+                        z-index: 50;
+                    }
+
+                    .moment-dom {
+                        background-color: blue;
+                    }
+
+                    .moment-zero {
+                        width: 2px;
+                        cursor: default;
+                        background-color: #808080;
+                    }
+
+                    .moment-completed {
+                        background-color: red;
+                    }
+
+                    .lane {
+                        position: relative; // For events to be positioned relative to the lane
+
+                        .event {
+                            cursor: pointer;
+                            position: absolute;
+                            border: 1px solid black;
+                            line-height: 15px;
+                            z-index: 100;
+
+                            .event-num {
+                                @include styling-event-num();
+
+                                margin-left: 1px;
+                                margin-top: -2px;
+                            }
+                        }
+
+                        .event.event-library {
+                            @include styling-event-library();
+                        }
+
+                        .event.event-auction {
+                            @include styling-event-auction();
+                        }
+
+                        .event.event-adserver {
+                            @include styling-event-adserver();
+                        }
+
+                        .event.event-failure {
+                            @include styling-event-failure();
+                        }
+
+                        .event.event-no-end {
+                            border-right: none;
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .legend {
+            margin-top: 15px;
+
+            .legend-open {
+                cursor: pointer;
+                color: #286090;
+                border-bottom: 1px dashed #286090;
+            }
+
+            .legend-content {
+                margin-top: 10px;
+                padding-bottom: 5px;
+                display: none;
+                border-bottom: 1px solid brown;
+
+                .legend-section {
+                    float: left;
+                    width: 33%;
+
+                    .item {
+                        .example-color {
+                            width: 80px;
+                            float: left;
+                        }
+
+                        .example-description {
+                            float: left;
+                            text-align: left;
+                            margin-left: 10px;
+                        }
+                    }
+
+                    .item::after {
+                        content: '';
+                        clear: both;
+                        display: block;
+                    }
+
+                    .item.lane {
+                        margin-bottom: 10px;
+
+                        .example-color {
+                            height: $LANE_COLLAPSED_HEIGHT;
+                        }
+
+                        .example-description {
+                            line-height: $LANE_COLLAPSED_HEIGHT;
+                        }
+
+                        .example-color.wrapper {
+                            @include styling-lane-wrapper();
+                        }
+
+                        .example-color.auction {
+                            @include styling-lane-auction();
+                        }
+
+                        .example-color.adserver {
+                            @include styling-lane-adserver();
+                        }
+                    }
+
+                    .item.url-call {
+
+                        .example-color {
+                            height: 30px;
+
+                            div {
+                                position: relative;
+                                top: 7px;
+                                height: $EVENT_HEIGHT;
+                            }
+                        }
+
+                        .example-description {
+                            line-height: $EVENT_HEIGHT + 13;
+                        }
+
+                        .example-color.library {
+                            div {
+                                @include styling-event-library();
+                            }
+                        }
+
+                        .example-color.auction {
+                            div {
+                                @include styling-event-auction();
+                            }
+                        }
+
+                        .example-color.adserver {
+                            div {
+                                @include styling-event-adserver();
+                            }
+                        }
+
+                        .example-color.failure {
+                            height: 50px;
+
+                            div.library {
+                                @include styling-event-library();
+                                @include styling-event-failure();
+                            }
+                            div.auction {
+                                margin-top: 8px;
+                                @include styling-event-auction();
+                                @include styling-event-failure();
+                            }
+                        }
+
+                        .example-description.failure {
+                            line-height: 50px;
+                        }
+
+                        .example-color.event-num {
+                            div {
+                                @include styling-event-num();
+
+
+                                top: 5px;
+                                margin-left: 30px;
+                                height: $EVENT_HEIGHT + 2;
+                                border: 1px solid $EVENT_AUCTION_BORDER_COLOR;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .legend-content:after {
+                content: '';
+                clear: both;
+                display: block;
+            }
+        }
+
+        .templates {
+            display: none;
+        }
+
+        // Observation information
+        .observation {
+            margin-bottom: 30px;
+
+            .url {
+                a {
+                    font-weight: bold;
+                    font-size: 25px;
+                    color: #0a50bd;
+                    display: inline-block;
+                    text-decoration: none;
+                }
+
+                a:hover span {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        // Hints section
+        .hints {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .hint {
+            padding-bottom: 5px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid brown;
+
+            .note, .error, .warning, .fix {
+                font-weight: bold;
+            }
+
+            .warning {
+                color: darkorange;
+            }
+
+            .error {
+                color: red;
+            }
+
+            .issue {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .ui-tooltip {
+        background-color: $POPUP_COLOR;
+        border: 1px solid #333;
+        box-shadow: none;
+    }
+
+    .event-tooltip {
+        table {
+            border-spacing: 0;
+
+            td {
+                padding: 0;
+            }
+
+            td.value {
+                padding-left: 3px;
+            }
+        }
+    }
+
+    .url-dialog-container {
+        background-color: $DIALOG_COLOR;
+
+        .ui-widget-content {
+            background-color: $DIALOG_COLOR;
+        }
+
+        .ui-button {
+            background-color: $DIALOG_BUTTON_COLOR;
+            color: black;
+        }
+
+        .dialog-content {
+            .prompt {
+                color: black;
+                margin-top: 20px;
+            }
+
+            .url {
+                margin-top: 20px;
+
+                input, textarea {
+                    width: 100%;
+                }
+
+                textarea {
+                    height: 45px;
+                }
+            }
+        }
+
+        .dialog-content.event-info {
+            .url {
+                margin-top: 8px;
+            }
+            textarea {
+                height: 90px;
+            }
+        }
+    }
+}

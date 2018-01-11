@@ -1,0 +1,47 @@
+{
+    "manifest_version":         2,
+    "name":                     "HB Insights",
+    "version":                  "1.0.1",
+    "description":              "Header Bidding Insights provides understanding of the activity happening under the hood of the website.",
+    "author":                   "Prebid.org",
+    "homepage_url":             "http://prebid.org",
+    // HB_IF_CHROME
+    "minimum_chrome_version":   "41",
+    // END_HB_IF_CHROME
+    // HB_IF_FF
+    "applications": {
+        "gecko": {
+            "id": "hb-insights@prebid.org",
+            "strict_min_version": "56.0"
+        }
+    },
+    // END_HB_IF_FF
+    "icons": {
+        "16":   "img/icons/icon-16px.png",
+        "32":   "img/icons/icon-32px.png",
+        "48":   "img/icons/icon-48px.png",
+        "64":   "img/icons/icon-64px.png",
+        "128":  "img/icons/icon-128px.png"
+    },
+    "background": {
+        "scripts": [
+            "js/worlds/background/entry-bundle.js"
+        ]
+    },
+    "page_action": {
+        "default_title": "HB Insights",
+        "default_icon": {
+            "16":   "img/icons/icon-16px.png",
+            "32":   "img/icons/icon-32px.png",
+            "48":   "img/icons/icon-48px.png",
+            "64":   "img/icons/icon-64px.png",
+            "128":  "img/icons/icon-128px.png"
+        }
+    },
+    "permissions": [
+        "activeTab",
+        "webRequest",
+        "webNavigation",
+        "<all_urls>"
+    ]
+}
