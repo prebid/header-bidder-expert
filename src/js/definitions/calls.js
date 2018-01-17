@@ -317,7 +317,7 @@ export default [
         listen:     '.afy11.net/cdsad.js',
     },
     {
-        // Criteo
+        // Criteo - auction
         sysId:      si.SYSID_AUC_CRITEO,
         sysType:    st.SYSTYPE_AUCTION,
         title:      'Criteo',
@@ -325,6 +325,13 @@ export default [
             '.criteo.com/delivery/rta/rta.js',
             'bidder.criteo.com/cdb',
         ],
+    },
+    {
+        // Criteo - library
+        sysId:      si.SYSID_LIB_CRITEO,
+        sysType:    st.SYSTYPE_LIBRARY,
+        ref:        si.SYSID_AUC_CRITEO,
+        listen:     'static.criteo.net/js/ld/publishertag.js'
     },
     {
         // E-Planning

@@ -133,6 +133,7 @@ export const systemIds = {
     SYSID_LIB_ATOMX: 'l-atomx',
     SYSID_LIB_BIDFLUENCE: 'l-bflu',
     SYSID_LIB_COX: 'l-cox',
+    SYSID_LIB_CRITEO: 'l-crit',
     SYSID_LIB_FREEWHEEL: 'l-freewh',
     SYSID_LIB_GETINTENT: 'l-getint',
     SYSID_LIB_NET_AVENIR: 'l-ntav',
