@@ -153,12 +153,12 @@ export default class ViewModel_Lanes {
 
             // Whether the collapsed representation is different from non-collapsed
             lane.isCollapsible = false;
-            $(lane.collapsedEvents).each((index, event) => {
+            for (const event of lane.collapsedEvents) {
                 if (event.events.length > 1) {
                     lane.isCollapsible = true;
-                    return false; // break
+                    break;
                 }
-            });
+            }
 
             // Height in uncollapsed state
             const numEventsAfterFirst = Math.max(lane.events.length - 1, 0);

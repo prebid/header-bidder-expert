@@ -61,16 +61,7 @@ export default class Toolbar {
      * Note: jQuery's class functions do not work on SVG.
      */
     _removeClass(node, className) {
-        const classString = $(node).attr('class');
-        const classes = classString.split(' ');
-        const newClasses = [];
-        classes.forEach(item => {
-            item = $.trim(item);
-            if (item !== className) {
-                newClasses.push(item);
-            }
-        });
-        $(node).attr('class', newClasses.join(' '));
+        node.classList.remove(className);
     }
 
     /**
@@ -78,24 +69,7 @@ export default class Toolbar {
      * Note: jQuery's class functions do not work on SVG.
      */
     _addClass(node, className) {
-        const classString = $(node).attr('class');
-        const classes = classString.split(' ');
-
-        let already = false;
-        $.each(classes, (index, item) => {
-            item = $.trim(item);
-            if (item === className) {
-                already = true;
-                return false; // break
-            }
-        });
-
-        if (already) {
-            return;
-        }
-
-        classes.push(className);
-        $(node).attr('class', classes.join(' '));
+        node.classList.add(className);
     }
 
     /**
