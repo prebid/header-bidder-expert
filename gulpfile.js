@@ -27,6 +27,7 @@ const browserConditions = require('./gulp/browser_conditions');
 
 // Constants
 const dirs = {
+    root:                   '.',
     target:                 'target',
     destChromeLocal:        'target/chrome/local',
     destChromePackage:      'target/chrome/package',
@@ -87,6 +88,8 @@ browserTasks.forEach(sd => {
     const taskNameProcessFiles =            sd.taskName + '-process-files';
     const taskNameUglify =                  sd.taskName + '-uglify';
     const taskNamePackage =                 sd.taskName + '-package';
+
+    const taskNameLicense =                 sd.taskName + '-license';
 
     // Build the directory with just the target browser source files
     gulp.task(
@@ -179,10 +182,18 @@ browserTasks.forEach(sd => {
             .pipe(gulp.dest(sd.destDir))
     );
 
+    // Copy LICENSE
+    gulp.task(
+        taskNameLicense,
+        () => gulp.src(dirs.root + '/LICENSE')
+            .pipe(gulp.dest(sd.destDir))
+    );
+
+
     // Package the extension for uploading to the store
     gulp.task(
         taskNamePackage,
-        [taskNameUglify],
+        [taskNameUglify, taskNameLicense],
         () => {
             const versionSuffix = require(`./${sd.destDir}/manifest.json`).version +
                 '-' +
