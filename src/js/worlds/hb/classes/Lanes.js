@@ -23,7 +23,7 @@ export default class {
 
         // Callbacks
         this._fnOnLaneCollapseChanged = null;
-    };
+    }
 
     /**
      * Initialize the object and setup all the events
@@ -114,7 +114,7 @@ export default class {
      */
     _clearTimeMeasures() {
         $(this._selector + ' .time').html('');
-    };
+    }
 
     /**
      * Create all the visual lanes
@@ -160,7 +160,7 @@ export default class {
             left: null,
             top: null,
             width: null,
-            height: null
+            height: null,
         };
     }
 
@@ -177,7 +177,7 @@ export default class {
             left: null,
             top: null,
             width: null,
-            height: null
+            height: null,
         };
     }
 
@@ -198,7 +198,7 @@ export default class {
 
             $container.append($element);
 
-            if (momentEvent.type != ViewModel_Lanes.MEV_ZERO) {
+            if (momentEvent.type !== ViewModel_Lanes.MEV_ZERO) {
                 this._tooltip.assign($element, this._getMomentEventHint(momentEvent));
             }
         });
@@ -218,7 +218,7 @@ export default class {
     _getMomentEventHint(momentEvent) {
         const content = this._templates.getContent('mev-' + momentEvent.type);
         const time = this._templates.formatTimeString(momentEvent.ms);
-        return this._templates.fill(content, {time: time});
+        return this._templates.fill(content, {time});
     }
 
     /**
@@ -266,7 +266,7 @@ export default class {
      */
     _renderLane(input) {
         const rLane = $.isNumeric(input) ? this._renderedLanes[input] : input;
-        const lane = rLane.lane;
+        const {lane} = rLane;
 
         if (lane.isCollapsed) {
             rLane.height = lane.collapsedHeight;
@@ -309,7 +309,7 @@ export default class {
         rLane.lane.collapsedEvents.forEach(cEvent => {
             this._renderEvent(rLane, cEvent);
         });
-    };
+    }
 
     /**
      * Render the uncollapsed events
@@ -359,12 +359,11 @@ export default class {
         // Create the element
         rEvent.$element = $('<div class="' + cls + '"></div>')
             .css({
-                    left: left + 'px',
-                    top: top + 'px',
-                    width: width + 'px',
-                    height: height + 'px'
-                }
-            );
+                left: left + 'px',
+                top: top + 'px',
+                width: width + 'px',
+                height: height + 'px',
+            });
 
         rEvent.left = left;
         rEvent.top = top;
@@ -387,7 +386,7 @@ export default class {
             });
         } else {
             rEvent.$element.on('click', event => {
-                const $dialog = $("#event-info");
+                const $dialog = $('#event-info');
 
                 // Close tooltips
                 this._tooltip.closeAll();
@@ -400,10 +399,10 @@ export default class {
                 // Show
                 $dialog
                     .dialog({
-                        dialogClass: "url-dialog-container no-titlebar",
+                        dialogClass: 'url-dialog-container no-titlebar',
                         modal: true,
                         width: 600,
-                        position: {my: "left top", at: "right+10 bottom+10", of: event.currentTarget},
+                        position: {my: 'left top', at: 'right+10 bottom+10', of: event.currentTarget},
                         buttons: [
                             {
                                 text: "Close",
@@ -501,7 +500,7 @@ export default class {
         // Return the filled content
         return {
             open: openFuncs,
-            content: this._templates.fill(content, data)
+            content: this._templates.fill(content, data),
         };
     }
 

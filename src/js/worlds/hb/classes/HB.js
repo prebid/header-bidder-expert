@@ -94,14 +94,14 @@ export default class {
      */
     _loadFrame() {
         // Get the frame by id
-        let matches = window.location.href.match(/\?id=([^&]*)/);
+        const matches = window.location.href.match(/\?id=([^&]*)/);
         if (!matches) {
-            throw "ID of the data frame is unknown";
+            throw new Error('ID of the data frame is unknown');
         }
 
-        let result = this._hbBackground.getFrame(matches[1]);
+        const result = this._hbBackground.getFrame(matches[1]);
         if (!result) {
-            throw "Data frame is not found";
+            throw new Error('Data frame is not found');
         }
 
         return result;
@@ -220,7 +220,7 @@ export default class {
         }
 
         return result;
-    };
+    }
 
     /**
      * Calculate the minimal zoom level - when the minimal rendered event is still not longer than maximal allowed
@@ -231,12 +231,12 @@ export default class {
         const MIN_CONSIDERED_MS_LENGTH = 25;
 
         // Choose the minimal length of the events
-        let timeLength = vmLanes.getTimeLength();
+        const timeLength = vmLanes.getTimeLength();
         let minMsAbsLength = null;
         let minMsNormalLength = null;
         this._vmLanes.getLanes().forEach(lane => {
             lane.events.forEach(event => {
-                let length = (event.msEnd === null ? timeLength : event.msEnd) - event.msStart;
+                const length = (event.msEnd === null ? timeLength : event.msEnd) - event.msStart;
 
                 // This is the absolute minimum
                 if ((minMsAbsLength === null) || (minMsAbsLength > length)) {
@@ -290,7 +290,7 @@ export default class {
      */
     _onZoomChanged(event, newZoomLevel) {
         this._setZoomLevel(newZoomLevel);
-    };
+    }
 
     /**
      * User wants to toggle legend

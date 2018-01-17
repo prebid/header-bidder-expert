@@ -7,11 +7,8 @@ export const systemTypes = {
     SYSTYPE_AUCTION: 'auction',
     SYSTYPE_LIBRARY: 'library',
     SYSTYPE_ADSERVER: 'adserver',
-    SYSTYPE_WRAPPER: 'wrapper'
+    SYSTYPE_WRAPPER: 'wrapper',
 };
-
-
-
 
 /**
  * System ids
@@ -170,5 +167,5 @@ export const systemIds = {
 export const responseTypes = {
     SUCCESS:     'success',
     REDIRECT:    'redirect',
-    ERROR:       'error'
+    ERROR:       'error',
 };

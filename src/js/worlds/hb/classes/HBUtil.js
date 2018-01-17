@@ -11,42 +11,41 @@ export default class HBUtil {
         this.MERGED_TYPE_PRIORITIES = {
             adserver: 1,
             auction: 2,
-            library: 3
+            library: 3,
         };
 
         this.TIME_UNITS = [
             {
                 msPerUnit: 1,
-                title: 'ms'
+                title: 'ms',
             },
             {
                 msPerUnit: 1000,
-                title: 's'
+                title: 's',
             },
             {
                 msPerUnit: 60 * 1000,
-                title: 'm'
+                title: 'm',
             },
             {
                 msPerUnit: 3600 * 1000,
-                title: 'h'
+                title: 'h',
             },
             {
                 msPerUnit: 24 * 3600 * 1000,
-                title: 'd'
+                title: 'd',
             },
             {
                 msPerUnit: 30 * 24 * 3600 * 1000,
-                title: 'mth'
-            }
+                title: 'mth',
+            },
         ];
     }
 
     /**
      * Sort collapsed or original events
      */
-    sortEvents(events)
-    {
+    sortEvents(events) {
         events.sort((a, b) => {
             if (a.msStart < b.msStart) {
                 return -1;
@@ -78,8 +77,7 @@ export default class HBUtil {
     /**
      * Chose the time length that we'd like to show depending on the lanes
      */
-    chooseTimeLength(lanes, pf)
-    {
+    chooseTimeLength(lanes, pf) {
         // Scan all the lanes and get the maximal msStart and maximal msEnd
         let maxMsStart = 0;
         let maxMsEnd = 0;
@@ -128,8 +126,7 @@ export default class HBUtil {
     /**
      * Choose the step and units to draw time ticks (milliseconds)
      */
-    chooseTimeTicksStep(chartWidth, scale)
-    {
+    chooseTimeTicksStep(chartWidth, scale) {
         // How many ticks we would like to have on the scale
         let numTicks = chartWidth / this._config.TIME_TICKS_DISTANCE_GOOD;
         if (numTicks < 1) {
@@ -174,7 +171,7 @@ export default class HBUtil {
 
         return {
             unit: selected,
-            msStep: step
+            msStep: step,
         };
     }
 
@@ -236,8 +233,7 @@ export default class HBUtil {
     /**
      * Return a string to represent the time mark according to the chosen units
      */
-    getTimeMarkText(ms, unit)
-    {
+    getTimeMarkText(ms, unit) {
         const number = ms / unit.msPerUnit;
         let stNumber;
         if (number == 0) {
@@ -254,14 +250,13 @@ export default class HBUtil {
      * Return the last non-zero digit after the comma, searching up to max digits.
      * The result is 1-based.
      */
-    _getLastNonZeroFracDigit(number, max, maxAfterFound)
-    {
+    _getLastNonZeroFracDigit(number, max, maxAfterFound) {
         let result = 0;
         let current = number - Math.floor(number);
         let foundAlready = false;
         for (let i = 1; i <= max; i++) {
             current *= 10;
-            let digit = Math.floor(current);
+            const digit = Math.floor(current);
             if (digit) {
                 if (!foundAlready) {
                     foundAlready = true;
@@ -278,8 +273,7 @@ export default class HBUtil {
     /**
      * Analyze the events in the lane, return the events to render in the collapsed state.
      */
-    pfEvents2CollapsedEvents(pfEvents)
-    {
+    pfEvents2CollapsedEvents(pfEvents) {
         const result = [];
 
         // Scan each of pfEvents and find the place where it should be inserted
@@ -348,8 +342,7 @@ export default class HBUtil {
     /**
      * Whether two events overlay each other
      */
-    _eventsOverlay(a, b)
-    {
+    _eventsOverlay(a, b) {
         const overlaysLeft = (a.msStart <= b.msStart)
             && ((a.msEnd === null) || (a.msEnd >= b.msStart));
         const overlaysRight = (a.msStart >= b.msStart)
@@ -357,12 +350,10 @@ export default class HBUtil {
         return overlaysLeft || overlaysRight;
     }
 
-
     /**
      * Take a collapsed event and merge it into another collapsed event
      */
-    _mergeCollapsedEvent(source, dest)
-    {
+    _mergeCollapsedEvent(source, dest) {
         dest.msStart = Math.min(dest.msStart, source.msStart);
         dest.msEnd = (dest.msEnd !== null && source.msEnd !== null)
             ? Math.max(dest.msEnd, source.msEnd)
@@ -373,26 +364,23 @@ export default class HBUtil {
     /**
      * Create collapsed event and fill it with the data from a normal event
      */
-    _createCollapsedEvent(pfEvent)
-    {
+    _createCollapsedEvent(pfEvent) {
         return {
             msStart: pfEvent.msStart,
             msEnd: pfEvent.msEnd,
             mergedType: null,
             hasFailure: false,
             stFailureReasons: [],
-            events: [pfEvent]
+            events: [pfEvent],
         };
     }
 
     /**
      * Fill the collapsed events' properties based on what they contain in their events
      */
-    _fillEventProperties(cEvents)
-    {
+    _fillEventProperties(cEvents) {
         cEvents.forEach(cEvent => {
             cEvent.events.forEach(event => {
-
                 // Failure
                 if (event.isFailure) {
                     cEvent.hasFailure = true;

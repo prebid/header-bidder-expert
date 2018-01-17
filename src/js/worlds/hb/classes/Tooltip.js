@@ -27,7 +27,7 @@ export default class {
         this._fnOnTooltipOpen = (event, ui) => {
             ui.tooltip.position({
                 my: 'left top+15',
-                of: event
+                of: event,
             });
         };
 
@@ -52,7 +52,7 @@ export default class {
         const passOptions = {
             items: $element,
             show: 200,
-            hide: 100
+            hide: 100,
         };
 
         if (typeof options === 'string' || options instanceof String) {
@@ -70,7 +70,7 @@ export default class {
         if (options.open) {
             options.open.forEach(fnOpen => {
                 $element.on('tooltipopen', fnOpen);
-            })
+            });
         }
     }
 
@@ -107,7 +107,7 @@ export default class {
             this._closing = {};
 
             // Open this tooltip
-            this._fnOldOpenFunc.apply(this, arguments);
+            this._fnOldOpenFunc(...arguments);
         };
     }
 
@@ -128,7 +128,7 @@ export default class {
             this._closing[uniqueId] = {
                 timeoutHandle: null,
                 thisArg: this,
-                args: arguments
+                args: arguments,
             };
 
             // Wait before closing
@@ -156,4 +156,4 @@ export default class {
 
         return result;
     }
-}
+};

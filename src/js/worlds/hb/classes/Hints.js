@@ -33,12 +33,11 @@ export default class {
     /**
      * Compose array of hints we'd like to show to the user
      */
-    _composeHints(preparedFrame)
-    {
+    _composeHints(preparedFrame) {
         let result = [];
 
         this._hintRules.forEach(hintRule => {
-            let hints = hintRule.generate(preparedFrame);
+            const hints = hintRule.generate(preparedFrame);
             if (hints.length) {
                 result = result.concat(hints);
             }
@@ -50,10 +49,9 @@ export default class {
     /**
      * Render hints
      */
-    _renderHints()
-    {
-        let $container = $(this._selector);
-        let templateContent = this._templates.getContent('hint');
+    _renderHints() {
+        const $container = $(this._selector);
+        const templateContent = this._templates.getContent('hint');
 
         this._hints.forEach(hint => {
             const data = {
@@ -61,10 +59,10 @@ export default class {
                 'stType':           this._getHintStType(hint.getType()),
                 'stIssue' :         hint.getIssue(),
                 'stConsequence':    hint.getConsequence(),
-                'stFix':            hint.getFix()
+                'stFix':            hint.getFix(),
             };
 
-            let html = this._templates.fill(templateContent, data);
+            const html = this._templates.fill(templateContent, data);
             $container.append(html);
 
             // Hide empty sections
@@ -82,8 +80,7 @@ export default class {
     /**
      * Human-readable hint type
      */
-    _getHintStType(type)
-    {
+    _getHintStType(type) {
         switch (type) {
             case Hint.TYPE_NOTE:
                 return 'Note';
@@ -92,23 +89,21 @@ export default class {
             case Hint.TYPE_ERROR:
                 return 'Note';
             default:
-                return 'Unknown hint type'
+                return 'Unknown hint type';
         }
     }
 
     /**
      * Show hints section
      */
-    _showHints()
-    {
+    _showHints() {
         $(this._selector).show();
     }
 
     /**
      * Hide hints section
      */
-    _hideHints()
-    {
+    _hideHints() {
         $(this._selector).hide();
     }
 };

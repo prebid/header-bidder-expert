@@ -56,7 +56,7 @@ export default class {
         }
 
         // 12m 12s
-        let m = Math.floor(ms / 60000);
+        const m = Math.floor(ms / 60000);
         ms -= m * 60000;
         const s = Math.floor(ms / 1000);
         return m + 'm ' + s + 's';

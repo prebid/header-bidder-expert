@@ -8,8 +8,7 @@ import {systemTypes as st} from '../../../../definitions/constants';
  * Hint rule to detect multiple wrappers on the page
  */
 export default class extends HintRule_Abstract {
-    constructor(factory)
-    {
+    constructor(factory) {
         super(factory);
 
         // Strings
@@ -28,7 +27,7 @@ export default class extends HintRule_Abstract {
         preparedFrame.lanes.forEach(lane => {
             let numLibraries = 0;
             lane.events.forEach(event => {
-                if (event.sysType == st.SYSTYPE_LIBRARY) {
+                if (event.sysType === st.SYSTYPE_LIBRARY) {
                     numLibraries++;
                 }
             });

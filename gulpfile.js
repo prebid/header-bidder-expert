@@ -32,7 +32,7 @@ const dirs = {
     destChromePackage:      'target/chrome/package',
     destFirefoxLocal:       'target/firefox/local',
     destFirefoxPackage:     'target/firefox/package',
-    sourceExtension:        'src'
+    sourceExtension:        'src',
 };
 
 // Define the browser tasks that we have
@@ -65,7 +65,7 @@ const browserTasks = [
 // Clean task: remove the whole target directory
 gulp.task(
     'clean',
-    () => gulp.src(dirs.target, {read : false}).pipe(clean())
+    () => gulp.src(dirs.target, {read: false}).pipe(clean())
 );
 
 // Run all the tasks where we compose the browser-specific directories
@@ -91,7 +91,7 @@ browserTasks.forEach(sd => {
     // Build the directory with just the target browser source files
     gulp.task(
         taskNamePrepareFiles,
-        () =>  gulp.src(
+        () => gulp.src(
                 sd.srcDir + '/**/!(' + sd.otherBrowserFilePattern + ')',
                 {base: sd.srcDir, nodir: true}
             )
@@ -145,7 +145,7 @@ browserTasks.forEach(sd => {
     });
 
     // Run all the tasks that process files (SASS, JS bundling)
-    let processTasks = bundleTasks.concat([taskNameSASS]);
+    const processTasks = bundleTasks.concat([taskNameSASS]);
     gulp.task(
         taskNameProcessFiles,
         cb => runSequence(taskNamePrepareFiles, processTasks, cb)
@@ -184,16 +184,15 @@ browserTasks.forEach(sd => {
         taskNamePackage,
         [taskNameUglify],
         () => {
-            const versionSuffix = require(`./${sd.destDir}/manifest.json`).version
-                + '-'
-                + (Math.floor((new Date()).getTime() / 1000));
+            const versionSuffix = require(`./${sd.destDir}/manifest.json`).version +
+                '-' +
+                (Math.floor((new Date()).getTime() / 1000));
 
             return gulp.src(sd.destDir + '/**/*')
                 .pipe(zip(`hb-insights-${sd.browser}-${versionSuffix}.zip`))
                 .pipe(gulp.dest(sd.destPackageDir));
         }
     );
-
 
     // Final task
     gulp.task(sd.taskName, [taskNamePackage]);

@@ -11,22 +11,16 @@ export default class {
     /**
      * Create an object of the provided class
      */
-    create(classInstance) {
-        const args = Array.prototype.slice.call(arguments);
-        args.shift();
-
+    create(classInstance, ...args) {
         return new classInstance(...args);
     }
 
     /**
      * Create or return already created object of the class
      */
-    getSingleton(name, classInstance) {
+    getSingleton(name, ...args) {
         if (!this._singletons[name]) {
-            const args = Array.prototype.slice.call(arguments);
-            args.shift(); // remove 'name' arg
-
-            this._singletons[name] = this.create.apply(this, args);
+            this._singletons[name] = this.create(...args);
         }
 
         return this._singletons[name];

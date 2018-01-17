@@ -2,14 +2,12 @@
 
 import Hint from '../Hint';
 import HintRule_Abstract from './Abstract';
-import {systemTypes as st} from '../../../../definitions/constants';
 
 /**
  * Hint rule to notify about 4xx and 5xx server errors
  */
 export default class extends HintRule_Abstract {
-    constructor(factory)
-    {
+    constructor(factory) {
         super(factory);
 
         // Strings
@@ -36,7 +34,7 @@ export default class extends HintRule_Abstract {
                 if (!laneErrors[lane.id]) {
                     laneErrors[lane.id] = {
                         lane,
-                        events: []
+                        events: [],
                     };
                 }
 
@@ -52,37 +50,35 @@ export default class extends HintRule_Abstract {
     /**
      * Return the Hint depending on what kind of errors we have seen
      */
-    _laneErrorsToHint(laneErrors)
-    {
+    _laneErrorsToHint(laneErrors) {
         let issue = null;
-        let consequence = null;
-        let fix = null;
+        const consequence = null;
+        const fix = null;
 
         // Compose issue and fix strings
         const lineIds = Object.keys(laneErrors);
-        if (lineIds.length == 1) {
+        if (lineIds.length === 1) {
             // There was just 1 vendor with failure(s)
             // Calculate the failures and find out their status codes
             const statuses = {};
             const id = lineIds[0];
             const thisLaneErrors = laneErrors[id];
 
-            const lane = thisLaneErrors.lane;
-            const events = thisLaneErrors.events;
+            const {lane, events} = thisLaneErrors;
 
             events.forEach(event => {
                 if (!statuses[event.statusCode]) {
                     statuses[event.statusCode] = {
                         statusCode: event.statusCode,
-                        num: 0
-                    }
+                        num: 0,
+                    };
                 }
                 statuses[event.statusCode].num++;
             });
 
             // Come up with proper strings
-            let statusCodes = Object.keys(statuses);
-            let statusCode0 = statusCodes[0];
+            const statusCodes = Object.keys(statuses);
+            const statusCode0 = statusCodes[0];
             const isMultiRequests = (statusCodes.length > 1) || (statuses[statusCode0].num > 1);
             if (isMultiRequests) {
                 issue = this.HINT_ISSUE_SINGLE_VENDOR_MULTI_FAILURES;

@@ -34,7 +34,7 @@ export default class ViewModel_Lanes {
         this.LANES_PRIORITY = {
             wrapper: 1,
             auction: 2,
-            adserver: 3
+            adserver: 3,
         };
 
         // Properties
@@ -129,10 +129,7 @@ export default class ViewModel_Lanes {
      * Create and return the moment event
      */
     _createMomentEvent(ms, type) {
-        return {
-            ms: ms,
-            type: type
-        };
+        return {ms, type};
     }
 
     /**
@@ -191,12 +188,12 @@ export default class ViewModel_Lanes {
             // View properties
             isCollapsed: false,
             collapsedHeight: null,
-            uncollapsedHeight: null
+            uncollapsedHeight: null,
         };
     }
 
     /**
-     * Compare two lanes, which should go firt in the list
+     * Compare two lanes to find out which of them should go first in the list
      */
     _compareLanes(a, b) {
         const priorityA = this.LANES_PRIORITY[a.type];
@@ -233,5 +230,3 @@ export default class ViewModel_Lanes {
         return 0;
     }
 };
-
-

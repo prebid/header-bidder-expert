@@ -6,8 +6,7 @@ import Hint from '../Hint';
  * Abstract hint rule
  */
 export default class {
-    constructor(factory)
-    {
+    constructor(factory) {
         this._factory = factory;
     }
 
@@ -15,14 +14,13 @@ export default class {
      * Generate a list of hints regarding the observed calls.
      */
     generate(preparedFrame) {
-        throw "generate() should be implemented in the ancestor of HintRule_Abstract";
+        throw new Error('generate() should be implemented in the ancestor of HintRule_Abstract');
     }
 
     /**
      * Create the hint object
      */
-    _createHint(type, issue, consequence, fix)
-    {
+    _createHint(type, issue, consequence, fix) {
         return this._factory.create(Hint, type, issue, consequence, fix);
     }
 };

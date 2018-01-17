@@ -76,19 +76,19 @@ export default class Requests {
             tsm:        Math.floor(details.timeStamp),
             resType:    null, // For completed requests - ok/failed
             statusCode: null, // For completed requests - http status code
-            isFake:     false
+            isFake:     false,
         };
 
         // If the request has finished - add the result properties
-        if (type == 'end') {
+        if (type === 'end') {
             result.statusCode = details.statusCode;
             result.resType = this._getResTypeForStatusCode(result.statusCode);
 
             // Signal about fake completed events - see https://bugs.chromium.org/p/chromium/issues/detail?id=477685#c20
-            let statusLine = details.statusLine + '';
+            let statusLine = String(details.statusLine);
             statusLine = statusLine.toLowerCase();
             result.isFake = (details.statusCode == 400) && (statusLine.indexOf('service worker') >= 0);
-        } else if (type == 'error') {
+        } else if (type === 'error') {
             result.resType = rt.ERROR;
         }
 
@@ -99,8 +99,7 @@ export default class Requests {
     /**
      * Return response type depending on response status code
      */
-    _getResTypeForStatusCode(statusCode)
-    {
+    _getResTypeForStatusCode(statusCode) {
         if ((statusCode >= 100) && (statusCode <= 299)) {
             return rt.SUCCESS;
         } else if ((statusCode >= 300) && (statusCode <= 399)) {
@@ -114,7 +113,7 @@ export default class Requests {
      * An HB request is starting
      */
     _onBeforeRequest(details) {
-        if ((details.tabId < 0) || (details.method == 'OPTIONS')) {
+        if ((details.tabId < 0) || (details.method === 'OPTIONS')) {
             return;
         }
 
@@ -130,7 +129,7 @@ export default class Requests {
      * An HB request has completed
      */
     _onCompleted(details) {
-        if ((details.tabId < 0) || (details.method == 'OPTIONS')) {
+        if ((details.tabId < 0) || (details.method === 'OPTIONS')) {
             return;
         }
 
@@ -146,7 +145,7 @@ export default class Requests {
      * An HB request has failed
      */
     _onErrorOccurred(details) {
-        if ((details.tabId < 0) || (details.method == 'OPTIONS')) {
+        if ((details.tabId < 0) || (details.method === 'OPTIONS')) {
             return;
         }
 

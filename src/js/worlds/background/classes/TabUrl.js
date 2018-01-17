@@ -47,8 +47,7 @@ export default class TabUrl {
      * A tab has been navigated to a different URL
      */
     _onNavigateToUrl(details) {
-        const tabId = details.tabId;
-        const url = details.url;
+        const {tabId, url} = details;
         const tsm = Math.floor(details.timeStamp);
 
         // Capture only top frame events
@@ -66,7 +65,7 @@ export default class TabUrl {
             return;
         }
 
-        $(this).trigger(TabUrl.EV_TAB_START, {tabId: tabId, url: url, tsm: tsm});
+        $(this).trigger(TabUrl.EV_TAB_START, {tabId, url, tsm});
     }
 
     /**

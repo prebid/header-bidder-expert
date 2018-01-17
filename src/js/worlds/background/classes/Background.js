@@ -86,9 +86,9 @@ export default class {
      * User clicked the app icon to see the HB activity
      */
     _onIconClicked(tab) {
-        let frame = this._dfManager.getDataFrame(tab.id);
+        const frame = this._dfManager.getDataFrame(tab.id);
         if (!frame) {
-            alert('No header bidding activity on the page');
+            window.alert('No header bidding activity on the page');
             return;
         }
 
@@ -96,9 +96,9 @@ export default class {
         const id = this._addRenderDataFrameTemporarily(frame);
 
         // Open the page and render the data frame there
-        const url = this._chromeRuntime.getURL('html/hb.html')
-            + '?id=' + id;
-        this._chromeTabs.create({url: url});
+        const url = this._chromeRuntime.getURL('html/hb.html') +
+            '?id=' + id;
+        this._chromeTabs.create({url});
     }
 
     /**
@@ -107,7 +107,7 @@ export default class {
      */
     _addRenderDataFrameTemporarily(frame) {
         frame = JSON.parse(JSON.stringify(frame)); // clone
-        frame.id = '' + Math.random();
+        frame.id = String(Math.random());
         frame.tsmEnded = (new Date()).getTime();
         this._renderDataFrames.push(frame);
 

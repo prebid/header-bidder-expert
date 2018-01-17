@@ -11,7 +11,7 @@ const gulpUtil = require('gulp-util');
  * Trim the first part of the content, if it's a line ending
  */
 function trimFirstLineEnding(content) {
-    let matches = content.match(/^\n|\r\n/);
+    const matches = content.match(/^\n|\r\n/);
     if (matches) {
         content = content.substr(matches[0].length);
     }
@@ -23,7 +23,7 @@ function trimFirstLineEnding(content) {
  * for this browser, or stripped if they are for a different browser.
  */
 module.exports = (browser, content, file) => {
-    browser = (browser == 'firefox') ? 'ff' : browser;
+    browser = (browser === 'firefox') ? 'ff' : browser;
 
     try {
         const cBrowser = browser.toUpperCase();
@@ -42,10 +42,8 @@ module.exports = (browser, content, file) => {
             }
 
             // Expand to the strings
-            const startingLine = matches[0];
-            const directiveStart = matches[1];
+            const [startingLine, directiveStart, cDirectiveForBrowser] = matches;
             const directiveEnd = 'END_' + directiveStart; // END_HB_IF_<BROWSER>
-            const cDirectiveForBrowser = matches[2]; // Capitalized browser name
 
             // Maybe we found end directive
             if (startingLine.indexOf(directiveEnd) >= 0) {
@@ -82,9 +80,9 @@ module.exports = (browser, content, file) => {
             postfix = trimFirstLineEnding(postfix);
 
             // Compose the new contents by either including or not including the snippet
-            content = prefix
-                + ((cDirectiveForBrowser == cBrowser) ? snippet : '')
-                + postfix;
+            content = prefix +
+                ((cDirectiveForBrowser === cBrowser) ? snippet : '') +
+                postfix;
         } while (true);
     } catch (e) {
         // transform plugin silences error messages, so at least print it here

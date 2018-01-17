@@ -5,7 +5,7 @@ import $ from 'jquery';
 import ViewModel_Lanes from '../classes/ViewModel/Lanes';
 
 /**
- * Manager for the "titles" section 
+ * Manager for the "titles" section
  */
 export default class {
     constructor(config, vmLanes, selector) {
@@ -14,7 +14,7 @@ export default class {
         this._selector = selector;
 
         this._titles = [];
-    };
+    }
 
     /**
      * Initialize the object and setup all the events
@@ -70,7 +70,6 @@ export default class {
                         .clone()
                         .removeAttr('id');
 
-
                     titleElement.$element
                         .addClass('collapsible')
                         .append(titleElement.$iconCollapse)
@@ -95,7 +94,7 @@ export default class {
             lane: null,
             $element: null,
             $iconCollapse: null,
-            $iconUncollapse: null
+            $iconUncollapse: null,
         };
     }
 
@@ -107,7 +106,6 @@ export default class {
             this._vmLanes.uncollapseLane(titleElement.lane);
         } else {
             this._vmLanes.collapseLane(titleElement.lane);
-
         }
     }
 
@@ -117,7 +115,7 @@ export default class {
      */
     _updateCollapsedView(input) {
         const titleElement = $.isNumeric(input) ? this._titles[input] : input;
-        const lane = titleElement.lane;
+        const {lane} = titleElement;
 
         if (lane.isCollapsed) {
             titleElement.$element

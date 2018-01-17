@@ -35,7 +35,7 @@ export default {
     EVENT_HEIGHT: 17,
 
     // Dashing style
-    EVENT_DASHED:   [7, 7],
+    EVENT_DASHED: [7, 7],
 
     // The recommended distance between time measure ticks (pixels)
     TIME_TICKS_DISTANCE_GOOD: 200,
@@ -47,5 +47,5 @@ export default {
     TIME_TICKS_DISTANCE_MIN_TO_RIGHT: 80,
 
     // Top offset for the moment event lines (pixels)
-    MOMENT_TOP_OFFSET: -10
+    MOMENT_TOP_OFFSET: -10,
 };

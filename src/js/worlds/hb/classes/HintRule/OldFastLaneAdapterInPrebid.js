@@ -8,8 +8,7 @@ import {systemIds as si} from '../../../../definitions/constants';
  * The publisher uses Prebid with old FL adapter, which needed to call RP library before doing auction calls
  */
 export default class extends HintRule_Abstract {
-    constructor(factory)
-    {
+    constructor(factory) {
         super(factory);
 
         // Strings
@@ -26,7 +25,7 @@ export default class extends HintRule_Abstract {
         // Do we have Prebid here
         let isPrebid = false;
         preparedFrame.lanes.forEach(lane => {
-            if (lane.id == si.SYSID_WRAP_PREBID) {
+            if (lane.id === si.SYSID_WRAP_PREBID) {
                 isPrebid = true;
             }
         });
@@ -38,7 +37,7 @@ export default class extends HintRule_Abstract {
         let isFLLibrary = false;
         preparedFrame.lanes.forEach(lane => {
             lane.events.forEach(event => {
-                if (event.sysId == si.SYSID_LIB_RP_HIGHLANDER) {
+                if (event.sysId === si.SYSID_LIB_RP_HIGHLANDER) {
                     isFLLibrary = true;
                 }
             });

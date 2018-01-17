@@ -38,7 +38,7 @@ export default class DataFrameManager {
      * Return whether there's HB activity on the page
      */
     isHBActivity(tabId) {
-        let frame = this.getDataFrame(tabId);
+        const frame = this.getDataFrame(tabId);
         if (!frame) {
             return false;
         }
@@ -46,7 +46,7 @@ export default class DataFrameManager {
         // Any recording with a URL other than plain DFP call means that we have spotted an
         // HB activity
         for (let i = 0; i < frame.calls.length; i++) {
-            if (frame.calls[i].sysId != systemIds.SYSID_AS_DFP) {
+            if (frame.calls[i].sysId !== systemIds.SYSID_AS_DFP) {
                 return true;
             }
         }
@@ -104,8 +104,8 @@ export default class DataFrameManager {
             tsmEnded: null,
             msDom: null,
             msCompleted: null,
-            url: url,
-            calls: []
+            url,
+            calls: [],
         };
     }
 
@@ -130,8 +130,7 @@ export default class DataFrameManager {
     /**
      * Record the start of an HB call for the tab
      */
-    _startCall(tabId, callId, tsmStart, callData)
-    {
+    _startCall(tabId, callId, tsmStart, callData) {
         const frame = this._frames[tabId];
         if (!frame) {
             return;
@@ -147,7 +146,7 @@ export default class DataFrameManager {
                 sysType:    null,
                 url:        null,
                 resType:    null,
-                statusCode: null
+                statusCode: null,
             };
 
             frame.calls.push(call);
@@ -162,8 +161,7 @@ export default class DataFrameManager {
     /**
      * Record the end of an HB call for the tab
      */
-    _endCall(tabId, callId, tsmEnd, callData)
-    {
+    _endCall(tabId, callId, tsmEnd, callData) {
         // Find the starting call
         const call = this._findCall(tabId, callId);
         if (!call) {
@@ -197,7 +195,7 @@ export default class DataFrameManager {
      * Find the call by id
      */
     _findCall(tabId, callId, isReturnIndex) {
-        isReturnIndex = !!isReturnIndex;
+        isReturnIndex = Boolean(isReturnIndex);
 
         const frame = this._frames[tabId];
         if (!frame) {
@@ -277,7 +275,7 @@ export default class DataFrameManager {
         const callData = {
             sysId:      callInfo.sysId,
             sysType:    callInfo.sysType,
-            url:        callInfo.url
+            url:        callInfo.url,
         };
 
         this._startCall(callInfo.tabId, callInfo.callId, callInfo.tsm, callData);
@@ -289,8 +287,8 @@ export default class DataFrameManager {
     _onCallEnd(ev, callInfo) {
         callInfo = this._fixRedirectErrorBug(callInfo);
 
-        let callData = {
-            resType: callInfo.resType
+        const callData = {
+            resType: callInfo.resType,
         };
         if (callInfo.statusCode) {
             callData.statusCode = callInfo.statusCode;
@@ -312,7 +310,7 @@ export default class DataFrameManager {
      */
     _fixRedirectErrorBug(callInfo) {
         // The result must be an error
-        if (callInfo.resType != rt.ERROR) {
+        if (callInfo.resType !== rt.ERROR) {
             return callInfo;
         }
 
@@ -323,7 +321,7 @@ export default class DataFrameManager {
         }
 
         // The call already should have a redirect response type
-        if (call.resType != rt.REDIRECT) {
+        if (call.resType !== rt.REDIRECT) {
             return callInfo;
         }
 

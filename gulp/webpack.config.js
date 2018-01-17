@@ -18,12 +18,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                use: ['file-loader?name=../../../img/webpack/[hash]/[name].[ext]']
+                use: ['file-loader?name=../../../img/webpack/[hash]/[name].[ext]'],
             },
-        ]
+        ],
     },
 };

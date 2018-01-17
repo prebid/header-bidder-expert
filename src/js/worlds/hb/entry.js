@@ -50,7 +50,7 @@ import ViewModel_Lanes from './classes/ViewModel/Lanes';
             hrMultipleBiddersNoWrapper,
             hrServerError,
             hrOldFastLaneAdapterInPrebid,
-            hrMultipleLibraryLoads
+            hrMultipleLibraryLoads,
         ],
         templates,
         '#hb-ui .hints'

@@ -8,7 +8,7 @@ module.exports = {
     output: {
         beautify: true,
         width: 120,
-        comments: /copyright|\(c\)|©/i
+        comments: /copyright|\(c\)|©/i,
     },
     nameCache: null,
     toplevel: false,

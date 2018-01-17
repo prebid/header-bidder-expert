@@ -24,23 +24,19 @@ export default class {
         this._fix = fix;
     }
 
-    getType()
-    {
+    getType() {
         return this._type;
     }
 
-    getIssue()
-    {
+    getIssue() {
         return this._issue;
     }
 
-    getConsequence()
-    {
+    getConsequence() {
         return this._consequence;
     }
 
-    getFix()
-    {
+    getFix() {
         return this._fix;
     }
 };
