@@ -4,20 +4,31 @@ import {systemTypes as st, systemIds as si} from './constants';
 
 /**
  * These are the URLs we're interested in.
+ *
  * Each item is:
  * - sysId - unique identifier of the system (platform) called
+ *
  * - sysType - the type of the system - like wrapper, auction, library load, etc.
+ *
  * - title - the human-readable title of the system called
+ *
  * - vendor (optional) - the human-readable name of the vendor of the system called
- *   If not set - will be taken from title.
- * - ref - sysId for the entry, to which this call is related - i.e. same system from the same vendor. title and vendor are not needed in such entries.
+ *   If not set - will be taken from `title`.
+ *
+ * - ref - sysId for the entry, to which this call is related - i.e. same system from the same vendor.
+ *   `title` and `vendor` are not needed in such entries.
+ *   When `ref` is defined then this call will be put to the swim lane that is referenced by `ref` property. This
+ *   is done for every library call, because we want to see them on the same lane as the auction (bid) calls.
+ *
  * - listen: string or array of strings - modified URL pattern for listening to the requests via webRequest API
  *   (see https://developer.chrome.com/extensions/match_patterns ).
+ *
  * - match (optional): string or array of strings - this is a modified regex (see below) to use when a URL call is reported by
- *   the API. As long as URL pattern syntax is limited and captures too much URLs, then we might need a better mechanism
+ *   the API. As long as URL pattern syntax is limited and captures too much URLs, then `match` is a better mechanism
  *   to filter out the URLs that we're not interested in.
  *   If the URL matches any of the `match` strings - then it is considered a correct HB URL.
  *   If 'match' is not defined - then it is derived from 'listen' property.
+ *
  * - not_match (optional): string or array of strings - this is a modified regex (see below) to filter out the URLs
  *   that pass both API and `match` patterns, but still should be removed.
  *
