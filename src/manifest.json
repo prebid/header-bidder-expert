@@ -1,7 +1,7 @@
 {
     "manifest_version":         2,
     "name":                     "HB Insights",
-    "version":                  "1.0.1",
+    "version":                  "1.0.2",
     "description":              "Header Bidding Insights provides understanding of the activity happening under the hood of the website.",
     "author":                   "Prebid.org",
     "homepage_url":             "http://prebid.org",
