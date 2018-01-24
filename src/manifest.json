@@ -1,7 +1,7 @@
 {
     "manifest_version":         2,
     "name":                     "HB Insights",
-    "version":                  "1.0.2",
+    "version":                  "1.0.3",
     "description":              "This extension provides insights into the the header bidding activity happening on the website.",
     "author":                   "Prebid.org",
     "homepage_url":             "http://prebid.org",
