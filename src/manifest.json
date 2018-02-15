@@ -1,8 +1,8 @@
 {
     "manifest_version":         2,
-    "name":                     "HB Insights",
-    "version":                  "1.0.3",
-    "description":              "This extension provides insights into the the header bidding activity happening on the website.",
+    "name":                     "Header Bidder Expert",
+    "version":                  "1.0.4",
+    "description":              "This extension provides insights into the the header bidding activity happening on the websites.",
     "author":                   "Prebid.org",
     "homepage_url":             "http://prebid.org",
     // HB_IF_CHROME
@@ -11,7 +11,7 @@
     // HB_IF_FF
     "applications": {
         "gecko": {
-            "id": "hb-insights@prebid.org",
+            "id": "header-bidder-expert@prebid.org",
             "strict_min_version": "56.0"
         }
     },
@@ -29,7 +29,7 @@
         ]
     },
     "page_action": {
-        "default_title": "HB Insights",
+        "default_title": "Header Bidder Expert",
         "default_icon": {
             "16":   "img/icons/icon-16px.png",
             "32":   "img/icons/icon-32px.png",

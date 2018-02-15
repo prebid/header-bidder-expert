@@ -200,7 +200,7 @@ browserTasks.forEach(sd => {
                 (Math.floor((new Date()).getTime() / 1000));
 
             return gulp.src(sd.destDir + '/**/*')
-                .pipe(zip(`hb-insights-${sd.browser}-${versionSuffix}.zip`))
+                .pipe(zip(`header-bidder-expert-${sd.browser}-${versionSuffix}.zip`))
                 .pipe(gulp.dest(sd.destPackageDir));
         }
     );
