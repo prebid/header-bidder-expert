@@ -822,6 +822,7 @@ export default [
         listen:     [
             '.pubmatic.com/AdServer/AdCallAggregator',
             '.pubmatic.com/AdServer/AdServerServlet',
+            '.pubmatic.com/translator',
         ],
     },
     {
