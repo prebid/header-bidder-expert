@@ -159,6 +159,7 @@ export const systemIds = {
     SYSID_WRAP_MEDIANET: 'w-mdnt',
     SYSID_WRAP_PREBID: 'w-prbd',
     SYSID_WRAP_PUBFOOD: 'w-pubf',
+    SYSID_WRAP_PUBMATIC_OPENWRAP: 'w-pbmt',
     SYSID_WRAP_SORTABLE: 'w-sort',
     SYSID_WRAP_TECHNORATI: 'w-tcrm',
 };
