@@ -833,6 +833,14 @@ export default [
         listen:     '.pubmatic.com/AdServer/js/gshowad.js',
     },
     {
+        // Peebid Server
+        sysId:      si.SYSID_AUC_PUBMATIC_OPENWRAP_S2S,
+        sysType:    st.SYSTYPE_AUCTION,
+        title:      'Pubmatic OpenWrap S2S',
+        vendor:     'PubMatic',
+        listen:     'ow.pubmatic.com/*',
+    },
+    {
         // PulsePoint - auction
         sysId:      si.SYSID_AUC_PULSEPOINT,
         sysType:    st.SYSTYPE_AUCTION,

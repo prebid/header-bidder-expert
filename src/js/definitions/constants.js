@@ -90,6 +90,7 @@ export const systemIds = {
     SYSID_AUC_PROXIMIC: 'a-pxmc',
     SYSID_AUC_PUBGEARS: 'a-pubgrs',
     SYSID_AUC_PUBMATIC: 'a-pbmt',
+    SYSID_AUC_PUBMATIC_OPENWRAP_S2S: 'a-pows2s',
     SYSID_AUC_PULSEPOINT: 'a-plse',
     SYSID_AUC_QUANTCAST: 'a-quantcst',
     SYSID_AUC_READPEAK: 'a-rdpeak',
