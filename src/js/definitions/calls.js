@@ -822,6 +822,7 @@ export default [
         listen:     [
             '.pubmatic.com/AdServer/AdCallAggregator',
             '.pubmatic.com/AdServer/AdServerServlet',
+            '.pubmatic.com/translator',
         ],
     },
     {
@@ -830,6 +831,22 @@ export default [
         sysType:    st.SYSTYPE_LIBRARY,
         ref:        si.SYSID_AUC_PUBMATIC,
         listen:     '.pubmatic.com/AdServer/js/gshowad.js',
+    },
+    {
+        // PubMatic - OpenWrap S2S (Prebid Server)
+        sysId:      si.SYSID_AUC_PUBMATIC_OPENWRAP_S2S,
+        sysType:    st.SYSTYPE_AUCTION,
+        title:      'Pubmatic OpenWrap S2S',
+        vendor:     'PubMatic',
+        listen:     'ow.pubmatic.com/*',
+    },
+    {
+        // PubMatic - OpenWrap
+        sysId:      si.SYSID_WRAP_PUBMATIC_OPENWRAP,
+        sysType:    st.SYSTYPE_WRAPPER,
+        title:      'PubMatic OpenWrap (wrapper)',
+        vendor:     'PubMatic',
+        listen:     'ads.pubmatic.com/*pwt.js'
     },
     {
         // PulsePoint - auction

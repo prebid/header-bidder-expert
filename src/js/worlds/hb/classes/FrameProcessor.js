@@ -247,6 +247,7 @@ export default class {
     _discoverWrappersIndirectly(frame) {
         // For now only Prebid supported
         let prebidFound = false;
+        let prebidBasedWrapperSeen = false;
         for (let i = 0; i < frame.calls.length; i++) {
             const call = frame.calls[i];
 
@@ -259,15 +260,18 @@ export default class {
                 case si.SYSID_AUC_RP_FL_MAS:
                     prebidFound = this._isPrebidPresentInFlCall(call.url);
                     break;
-            }
 
-            if (prebidFound) {
-                break;
+                // Wrappers that are built on top Prebid may trigger this causing two wrappers
+                //  to be incorrectly listed.  Suppress the indirect find if one of those
+                //  wrappers is present
+                case si.SYSID_WRAP_PUBMATIC_OPENWRAP:
+                    prebidBasedWrapperSeen = true;
+                    break;
             }
         }
 
         // Result
-        return prebidFound
+        return prebidFound && prebidBasedWrapperSeen == false
             ? [si.SYSID_WRAP_PREBID]
             : [];
     }

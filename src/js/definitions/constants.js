@@ -90,6 +90,7 @@ export const systemIds = {
     SYSID_AUC_PROXIMIC: 'a-pxmc',
     SYSID_AUC_PUBGEARS: 'a-pubgrs',
     SYSID_AUC_PUBMATIC: 'a-pbmt',
+    SYSID_AUC_PUBMATIC_OPENWRAP_S2S: 'a-pows2s',
     SYSID_AUC_PULSEPOINT: 'a-plse',
     SYSID_AUC_QUANTCAST: 'a-quantcst',
     SYSID_AUC_READPEAK: 'a-rdpeak',
@@ -158,6 +159,7 @@ export const systemIds = {
     SYSID_WRAP_MEDIANET: 'w-mdnt',
     SYSID_WRAP_PREBID: 'w-prbd',
     SYSID_WRAP_PUBFOOD: 'w-pubf',
+    SYSID_WRAP_PUBMATIC_OPENWRAP: 'w-pbmt',
     SYSID_WRAP_SORTABLE: 'w-sort',
     SYSID_WRAP_TECHNORATI: 'w-tcrm',
 };
